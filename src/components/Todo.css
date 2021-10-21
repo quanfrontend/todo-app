@@ -1,0 +1,39 @@
+.Todo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff;
+  border-radius: 3px;
+  padding: 5px 10px;
+  margin-bottom: 10px;
+}
+.todo__content {
+  font-size: 16px;
+  color: darkorange;
+  font-weight: 500;
+  max-width: 300px;
+  word-break: break-word;
+}
+.todo__actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.btn {
+  width: 30px;
+  height: 30px;
+  font-size: 14px;
+  background-color: darkorange;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  border-radius: 3px;
+  cursor: pointer;
+}
+.btn:hover {
+  background-color: rgb(255, 156, 35);
+}
+.btn-edit {
+  margin-right: 5px;
+}
