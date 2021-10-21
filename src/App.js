@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import "./App.css";
 import Todo from "./components/Todo";
 import swal from "sweetalert";
-import { icons } from "react-icons/lib";
 
 export default class App extends Component {
   constructor(props) {
