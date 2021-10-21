@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import "./App.css";
 import Todo from "./components/Todo";
+import swal from "sweetalert";
+import { icons } from "react-icons/lib";
 
 export default class App extends Component {
   constructor(props) {
@@ -44,11 +46,27 @@ export default class App extends Component {
     const { newTodo, todoItems } = this.state;
     let index = this.state.todoItems.indexOf(newTodo);
     if (index >= 0) {
-      todoItems.splice(index, 1, this.inputElement.current.value);
-      this.setState({
-        newTodo: "",
-        tidoItems: [...todoItems],
-      });
+      if (this.inputElement.current.value !== newTodo) {
+        todoItems.splice(index, 1, this.inputElement.current.value);
+        this.setState({
+          newTodo: "",
+          tidoItems: [...todoItems],
+        });
+        this.inputElement.current.value = "";
+        swal({
+          title: "Good job!",
+          text: "you have successfully updated",
+          icon: "success",
+        });
+      } else {
+        swal({
+          text: "you haven't made changes yet",
+          icons: "warning",
+        });
+        this.inputElement.current.value = "";
+      }
+    } else {
+      swal("Error", "Sorry, todo has been deleted", "warning");
       this.inputElement.current.value = "";
     }
   }
@@ -65,15 +83,33 @@ export default class App extends Component {
       });
     }
     this.inputElement.current.value = "";
+    swal({
+      title: "Good job!",
+      text: "you have successfully added todos",
+      icon: "success",
+    });
   }
 
   handleDell(item) {
     return () => {
       const { todoItems } = this.state;
       let index = todoItems.indexOf(item);
-      todoItems.splice(index, 1);
-      this.setState({
-        todoItems: [...todoItems],
+      swal({
+        title: "Are you sure?",
+        Text: "Once deleted, you will not be able to recover this imaginary file!",
+        icons: "warning",
+        buttons: true,
+        dangerMode: true,
+      }).then((ok) => {
+        if (ok) {
+          todoItems.splice(index, 1);
+          this.setState({
+            todoItems: [...todoItems],
+          });
+          swal("Poof! Your imaginary file has been deleted!", {
+            icon: "success",
+          });
+        }
       });
     };
   }
